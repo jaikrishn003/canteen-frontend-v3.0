@@ -23,7 +23,7 @@ const ItemList = (props) => {
     <div  className='card-view'>
         <Flex justifyContent='flex-start'>
             <Box style={{marginTop:"20px"}}>
-                {props.item_stock == 0 || props.availability === 'false' ?
+                {props.item_stock == 0 || props.availability === false ?
                 <Image className='card-image' borderRadius='10px' boxSize='50px' src={props.imgUrl} style={{ filter: 'grayscale(100%)' }}/>:
                  <Image className='card-image' borderRadius='10px' boxSize='50px' src={props.imgUrl} />
                 }

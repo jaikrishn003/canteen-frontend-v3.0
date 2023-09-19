@@ -43,7 +43,7 @@ const Cart = () => {
 
     if (items) {
       const idList = items.map((item) => item.id);
-      
+        
 
       const unsubscribe = onValue(menuRef, (snapshot) => {
         if (snapshot.exists()) {
@@ -59,7 +59,7 @@ const Cart = () => {
             }
             return null;
           });
-
+          
           const isAnyItemNotAvailable = selectedData.some((item) => item.item_avl === false);
 
           setCartEnabled(!isAnyItemNotAvailable);
@@ -98,7 +98,7 @@ const Cart = () => {
       "handler":function(response){
         console.log(response)
         axios.post(`${server}/payment/verify`, {response:response, cartItem:menuData, userMail:userEmail, userId:GuserId}).then(res=>{
-          if(res.data.respond){
+          
             // const userRef = ref(database, `/users/${userId}`);
             // push(userRef, res.data.orderId).then(()=>{
             // localStorage.removeItem("Menu")
@@ -109,8 +109,8 @@ const Cart = () => {
             // localStorage.removeItem("Menu")
             // window.location.href="/"
             localStorage.removeItem("Menu")
-            window.location.href="/orders"
-          }
+            window.location.href="/myorders"
+          
         }).catch(err=>{
           console.log(err)
         })
@@ -180,7 +180,7 @@ const Cart = () => {
                         amount={menuData[itemName].item_price  * menuData[itemName].count}
                         offerPrice={menuData[itemName].item_cut_price * menuData[itemName].count}
                         item_amount={menuData[itemName].item_stock}
-                        item_Avl={menuData[itemName].item_avl}
+                        availability={menuData[itemName].item_avl}
                       />
                       
                       <Divider my="4" borderColor={'#EEF6FD'} borderWidth={'1px'} />

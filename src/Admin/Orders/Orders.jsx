@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Auth } from '../../ServerDetails/firebaseConfig'
+import { Auth, App } from '../../ServerDetails/firebaseConfig'
 
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -10,9 +10,18 @@ import AdminId from '../../ServerDetails/adminId'
 
 import Sidebar from '../../Extras/Sidebar/Sidebar'
 
+
+import Stafforder from '../../Extras/OrdersAdmin/OrdersAdmin'
+
+import { getDatabase, ref, onValue } from 'firebase/database'
+
+
 const Orders = () => {
     const[isPageLoading, setIsPageLoading]=useState(true)
 
+    const[orderData, setorderData]=useState([])
+
+    const database = getDatabase()
 
     useEffect(()=>{
         onAuthStateChanged(Auth, (user)=>{
@@ -26,7 +35,34 @@ const Orders = () => {
                 window.location.href = "/admin/login"
             }
         })
-    })
+    },[Auth])
+
+
+    useEffect(()=>{
+        const orderRaw = ref(database, "users")
+        onValue(orderRaw, (snapshot)=>{
+            const data = snapshot.val()
+            const orders = Object.keys(data).map((userId)=>{
+                const userOrders = data[userId]
+                return userOrders
+            })
+
+            // data.foreach((userId)=>{
+            //     console.log(userId)
+            //     console.log(data[userId])
+            // })
+
+            // console.log(typeof(data))
+            
+
+            
+            
+            
+
+            
+            setorderData(<Stafforder order={orders}/>)
+        })
+    },[database])
 
   return (
     <>
@@ -38,7 +74,7 @@ const Orders = () => {
             <>
                 <Sidebar children={
                     <>
-                        Orders
+                        {orderData}
                     </>
                 }/>
             </>

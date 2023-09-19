@@ -17,6 +17,7 @@ import Staffs from "./Admin/Staffs/Staffs";
 import ClientLogin from "./Client/Login/ClientLogin";
 import ClientHome from "./Client/Home/ClientHome";
 import Cart from "./Client/Cart/Cart";
+import MyOrders from "./Client/MyOrders/MyOrders";
 //************* */
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/login" element={<ClientLogin/>}/>
         <Route path="/" element={<ClientHome/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/myorders" element={<MyOrders/>}/>
 
       </Routes>
       

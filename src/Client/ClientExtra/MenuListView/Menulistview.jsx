@@ -104,7 +104,7 @@ const Menulistview = (props) => {
         <div className='card-view' >
       <Flex justifyContent='flex-start' style={{marginTop:"15px"}}>
       <Box p='2'>
-        {props.item_amount == 0 || props.item_Avl === "false"  ?
+        {props.item_amount == 0 || props.item_Avl === false  ?
         <Image
         className="card-image"
         borderRadius="10px"
@@ -145,7 +145,7 @@ const Menulistview = (props) => {
             </Text>
             
 
-            {props.item_amount ==0 || props.item_Avl === "false" ?
+            {props.item_amount ==0 || props.item_Avl === false ?
             <Text color="red.500">Out Of stock</Text>
             :
             <Button onClick={onOpen} variant="solid" colorScheme="green">
