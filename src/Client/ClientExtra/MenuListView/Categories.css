@@ -1,0 +1,15 @@
+.categories {
+    margin-top: 20px;
+    font-family: 'Montserrat';
+    width: calc(100% - 70px);
+    margin-left: 35px;
+    margin-right: 35px;
+    
+}
+
+.categires-list-spacing {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+}
