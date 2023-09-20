@@ -27,7 +27,14 @@ const Stafforder = ({ order }) => {
           <Td>
             {value.map((item) => (
               <div key={item.item_name}>
-                {item.item_name} - Amount: {item.count}
+                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span>{item.count} x {item.item_name} -</span>
+                    {item.order_status ? (
+                      <Text color={'green'}> Delivered</Text>
+                    ) : (
+                      <Text color={'yellow.300'}> Pending</Text>
+                    )}
+                  </div>
               </div>
             ))}
           </Td>

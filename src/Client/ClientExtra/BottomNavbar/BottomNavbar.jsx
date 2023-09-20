@@ -32,11 +32,11 @@ const BottomNavbar = () => {
             <TiThListOutline   color={urlL === '/myorders' ? '#007AFF' : '#777777'}/>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <a href='#' style={{ fontSize: '25px', transition: 'transform 0.3s' }}>
             <BsFillPersonFill color={urlL === '/account' ? '#007AFF' : '#777777'}/>
           </a>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

@@ -26,6 +26,8 @@ const Cart = () => {
   const database = getDatabase(App);
   const menuRef = ref(database, 'menu');
 
+  const[isButttonLoading, setisbuttonLoading]=useState(false)
+
   useEffect(() => {
     onAuthStateChanged(Auth, (user) => {
       if (user) {
@@ -83,9 +85,18 @@ const Cart = () => {
       setIsCartData(false);
     }
   }, []);
+  const[acceptOrders, setacceptOrders]=useState()
+  useEffect(()=>{
+    const getValues = ref(database, "settings")
+    onValue(getValues, (snapshot)=>{
+        const data = snapshot.val()
 
+        setacceptOrders(data.accept_orders)
+    })
+})
 
   const handleOpenRazorpay=(data)=>{
+    setisbuttonLoading(true)
     const options={
       "key":"rzp_test_wji97YyPAnEVSW",
       "amount": Number(data.amount),
@@ -123,6 +134,7 @@ const Cart = () => {
 }
 
   const handlePayment = ()=>{
+    setisbuttonLoading(true)
     const data = {amount:itemTotal}
     
     axios.post(`${server}/payment/initialize`, data)
@@ -142,7 +154,10 @@ const Cart = () => {
       ) : (
         <>
           <TopbarClient content={userDisplayName} />
-          <Box>
+          {
+            acceptOrders
+            ?
+            <Box>
             <div style={{ overflowY: 'scroll', marginTop: '20px' }}>
               <div style={{ justifyContent: 'space-between', display: 'flex', marginTop: '10px' }}>
                 <Flex justifyContent={'flex-start'}>
@@ -159,6 +174,7 @@ const Cart = () => {
                       isDisabled={!(isCartData && cartEnabled)}
                       onClick={() => (cartEnabled ? (handlePayment()) : null)}
                       colorScheme="green"
+                      isLoading={isButttonLoading}
                     >
                       Checkout
                     </Button>
@@ -190,6 +206,11 @@ const Cart = () => {
               )}
             </div>
           </Box>
+          :
+          <div style={{display:"flex", justifyContent:"center", marginTop:"30px"}}>We dont accept Orders during this hour</div>
+
+          }
+          
           <BottomNavbar />
         </>
       )}

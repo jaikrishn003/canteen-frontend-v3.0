@@ -80,7 +80,7 @@ const Menulistview = (props) => {
         title:"Item Added To Cart",
         status:'success',
         isClosable:true,
-        position:'top'
+        position:'bottom'
       })
       
       
@@ -145,7 +145,7 @@ const Menulistview = (props) => {
             </Text>
             
 
-            {props.item_amount ==0 || props.item_Avl === false ?
+            {props.item_amount ===0 || props.item_Avl === false ?
             <Text color="red.500">Out Of stock</Text>
             :
             <Button onClick={onOpen} variant="solid" colorScheme="green">

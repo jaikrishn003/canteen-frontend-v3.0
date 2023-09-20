@@ -10,6 +10,7 @@ import Home from "./Admin/Home/Home";
 import Menu from "./Admin/Menu/Menu";
 import Orders from "./Admin/Orders/Orders";
 import Staffs from "./Admin/Staffs/Staffs";
+import Settings from "./Admin/Settings/Settings";
 //********************* */
 
 //Client Side
@@ -30,6 +31,7 @@ function App() {
         <Route path="/admin/menu" element={<Menu />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/staffs" element={<Staffs />} />
+        <Route path="/admin/settings" element={<Settings/>}/>
 
 
         <Route path="/login" element={<ClientLogin/>}/>
