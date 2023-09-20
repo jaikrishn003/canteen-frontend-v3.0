@@ -68,7 +68,7 @@ const Cart = () => {
             const item = data[id];
             const count = items.find((item) => item.id === id).count;
             if (item) {
-              return total + item.item_price * count;
+              return total + item.item_cut_price * count;
             }
             return total;
           }, 0);
@@ -177,7 +177,7 @@ const Cart = () => {
                         imgUrl={menuData[itemName].item_image}
                         name={menuData[itemName].item_name}
                         count={menuData[itemName].count}
-                        amount={menuData[itemName].item_price  * menuData[itemName].count}
+                        amount={menuData[itemName].item_cut_price  * menuData[itemName].count}
                         offerPrice={menuData[itemName].item_cut_price * menuData[itemName].count}
                         item_amount={menuData[itemName].item_stock}
                         availability={menuData[itemName].item_avl}
