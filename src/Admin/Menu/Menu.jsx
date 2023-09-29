@@ -11,7 +11,6 @@ import AdminId from '../../ServerDetails/adminId'
 import Sidebar from '../../Extras/Sidebar/Sidebar'
 
 import {
-    ChakraProvider,
     Table,
     Thead,
     Tbody,
@@ -42,6 +41,8 @@ const Menu = () => {
 
 
     const[isPageLoading, setIsPageLoading]=useState(true)
+
+    const[buttonisLoading, setisButtonLoading]=useState(false)
 
 
     const[menuItems, setMenuItems]=useState([])
@@ -119,6 +120,28 @@ const Menu = () => {
         setMenuItems((prevMenuItems) => [...prevMenuItems, newItem]);
       };
 
+      const onResetClicked = ()=>{
+      // const defaultStockValues = {}; // Store default stock values here
+        setisButtonLoading(true)
+       const updatedMenu = menuItems.map((item)=>{
+        const itemKey = item.item_name
+        return {
+          ...item,
+          item_stock:item.item_default_stock
+        }
+       })
+      //  updatedMenu.forEach((item)=>{
+      //   const itemRef = ref(database, `menu/${item.item_name}`)
+      //   set(itemRef,{item_stock:item})
+      //  })
+
+      const itemRef = ref(database, "menu/")
+
+      set(itemRef, updatedMenu)
+      .catch((error)=>console.log(error))
+       setisButtonLoading(false)
+      }
+
   return (
     <>
         {
@@ -132,6 +155,10 @@ const Menu = () => {
                     <Flex justify="space-between" mb={4}>
                       <Button onClick={handleAddNewMenu} colorScheme="blue">
                         + Add New Menu Item
+                      </Button>
+
+                      <Button isLoading={buttonisLoading} colorScheme="blue" onClick={()=>onResetClicked()}>
+                        Reset all to default stock
                       </Button>
                     </Flex>
                     <Table variant="simple">

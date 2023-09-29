@@ -19,11 +19,15 @@ const MyOrders = () => {
   const database = getDatabase(App);
   const [orders, setOrders] = useState([]); // Initialize orders as an empty array
 
+  const [displayPic, setDisplayPic] = useState('');
+
+
   useEffect(() => {
     onAuthStateChanged(Auth, (user) => {
       if (user) {
         setUserDisplayName(user.displayName);
         setUserId(user.uid);
+        setDisplayPic(user.photoURL)
         setIsPageLoading(false);
       } else {
         window.location.href = '/login';
@@ -41,8 +45,6 @@ const MyOrders = () => {
       if (orderData) {
         const orderComponents = Object.keys(orderData).map((orderId) => {
           const orderedItems = orderData[orderId];
-          console.log(`Order id: ${orderId}`);
-          console.log(`Ordered Items: ${JSON.stringify(orderedItems)}`);
 
           const orderPartialData = {
             order_id: orderId,
@@ -64,7 +66,7 @@ const MyOrders = () => {
         <SpinnerLoader />
       ) : (
         <>
-          <TopbarClient content={userDisplayName} />
+          <TopbarClient content={userDisplayName} displayPic={displayPic}  />
 
           {/* Render the orders */}
           {orders}

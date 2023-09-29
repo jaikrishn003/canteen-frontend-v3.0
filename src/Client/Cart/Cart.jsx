@@ -22,6 +22,7 @@ const Cart = () => {
   const [cartEnabled, setCartEnabled] = useState(false);
   const[userEmail, setuserEmail]=useState("")
   const[GuserId, setuserId]=useState("")
+  
 
   const database = getDatabase(App);
   const menuRef = ref(database, 'menu');
@@ -153,7 +154,7 @@ const Cart = () => {
         <SpinnerLoader />
       ) : (
         <>
-          <TopbarClient content={userDisplayName} />
+          <TopbarClient content={userDisplayName} displayPic={displayPic} />
           {
             acceptOrders
             ?
